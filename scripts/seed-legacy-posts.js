@@ -4,8 +4,9 @@
  * (src/content/posts.ts) into the CMS database, with their three authors.
  *
  * Images are read from the old Frontend assets folder (read only) and uploaded
- * to Cloudinary. Posts whose slug already exists are skipped, so the script is
- * safe to run more than once.
+ * to Cloudinary; if that folder is gone, the copies already on Cloudinary are
+ * reused. Posts whose slug already exists are skipped, so the script is safe
+ * to run more than once.
  *
  *   npm run seed:legacy-posts
  *
@@ -103,11 +104,20 @@ async function uploadAsset(fileName) {
   if (uploadCache.has(fileName)) return uploadCache.get(fileName);
 
   const filePath = path.join(assetsDir, fileName);
+  const publicId = `legacy-${path.parse(fileName).name}`;
+
+  // Without the old Frontend assets, reuse the copy uploaded by an earlier run.
   if (!fs.existsSync(filePath)) {
-    throw new Error(`Legacy asset not found: ${filePath}`);
+    try {
+      const existing = await cloudinary.api.resource(`${cloudinaryFolder}/${publicId}`);
+      console.log(`  image ${fileName} -> ${existing.secure_url} (already on Cloudinary)`);
+      uploadCache.set(fileName, existing.secure_url);
+      return existing.secure_url;
+    } catch {
+      throw new Error(`Legacy asset not found locally (${filePath}) or on Cloudinary (${cloudinaryFolder}/${publicId})`);
+    }
   }
 
-  const publicId = `legacy-${path.parse(fileName).name}`;
   const result = await cloudinary.uploader.upload(filePath, {
     folder: cloudinaryFolder,
     public_id: publicId,
