@@ -1,7 +1,7 @@
 const db = require('../models/database');
 const bcrypt = require('bcryptjs');
 const validator = require('validator');
-const { destroyUploadedImage } = require('../config/cloudinary');
+const { destroyUploadedImage, isManagedImage } = require('../config/storage');
 
 exports.getProfile = async (req, res) => {
     try {
@@ -137,22 +137,22 @@ exports.updateUser = async (req, res) => {
             return res.status(404).json({ success: false, message: 'User not found' });
         }
 
-        let oldCloudinaryImage = null;
+        let oldUploadedImage = null;
         await db.beginTransaction();
-        // Delete old image from Cloudinary if updating
+        // Delete the old uploaded image if it is being replaced
         if (profile_image) {
             if (oldUser && oldUser.profile_image &&
                 oldUser.profile_image !== profile_image &&
-                oldUser.profile_image.includes('cloudinary.com')) {
-                oldCloudinaryImage = oldUser.profile_image;
+                isManagedImage(oldUser.profile_image)) {
+                oldUploadedImage = oldUser.profile_image;
             }
         }
 
         await db.update('tbl_users', updateData, 'id = ?', [id]);
         await db.commit();
 
-        if (oldCloudinaryImage) {
-            destroyUploadedImage(oldCloudinaryImage);
+        if (oldUploadedImage) {
+            destroyUploadedImage(oldUploadedImage);
         }
 
         res.json({ success: true, message: 'User updated successfully' });
@@ -171,7 +171,7 @@ exports.deleteUser = async (req, res) => {
             return res.status(404).json({ success: false, message: 'User not found' });
         }
 
-        const imageToDelete = user.profile_image && user.profile_image.includes('cloudinary.com')
+        const imageToDelete = isManagedImage(user.profile_image)
             ? user.profile_image
             : null;
 

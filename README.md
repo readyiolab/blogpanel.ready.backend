@@ -23,7 +23,7 @@ Health check: `curl http://localhost:4000/health`
 | `npm start` | Start the API (`node src/app.js`), used by PM2 in production |
 | `npm run dev` | Start with auto-reload |
 | `npm run migrate` | Apply `sql/readyio_schema.sql`, roles, permissions; create/update the admin user from `ADMIN_EMAIL`/`ADMIN_PASSWORD` (**resets that password**) |
-| `npm run seed:legacy-posts` | Import the 6 original blog posts, uploading their images from `../Frontend/src/assets` to Cloudinary |
+| `npm run seed:legacy-posts` | Import the 6 original blog posts (images reused from Cloudinary; needs `CLOUDINARY_*`) |
 
 ## Configuration
 
@@ -32,6 +32,7 @@ All settings come from `.env`; every key is documented in [`.env.example`](.env.
 - **Database:** MySQL via `mysql2`. When `DB_HOST` is an Amazon RDS host and `global-bundle.pem` exists in this folder, connections use SSL.
 - **CORS:** `readyio.com`, `www.readyio.com`, `blog.readyio.com`, `blogpanel.readyio.com` and the local dev ports (8080, 8081, 5173, 5174) are always allowed. Add more with `CORS_ORIGIN` (comma-separated).
 - **Revalidation:** after an article is created, updated, published or deleted, the API POSTs `{ slug, oldSlug }` with header `x-revalidate-secret: $REVALIDATE_SECRET` to every URL in `REVALIDATE_WEBHOOKS`, so the Next.js sites refresh immediately.
+- **Images:** admin panel uploads go to DigitalOcean Spaces (`DO_SPACES_*`, under `UPLOAD_FOLDER/`) when configured, otherwise Cloudinary. Replaced or deleted images are removed from whichever store holds them. The 6 original posts keep their Cloudinary images.
 - **Cache:** Upstash Redis (optional). Without it, responses are served straight from MySQL.
 
 ## Endpoints
@@ -75,7 +76,7 @@ Rate limits: contact, booking, newsletter and chat booking allow 10 requests per
 | `/api/categories` (POST/PUT/DELETE) | Manage categories |
 | `/api/comments` | Moderate comments |
 | `/api/users` | Users and roles (RBAC) |
-| `/api/upload` | Image uploads to Cloudinary |
+| `/api/upload` | Image uploads to DigitalOcean Spaces (or Cloudinary when Spaces is not configured) |
 | `/api/admin` | Dashboard, analytics, activity logs, newsletter subscribers |
 
 ## Project layout

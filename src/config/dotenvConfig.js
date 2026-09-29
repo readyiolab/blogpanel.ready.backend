@@ -20,6 +20,16 @@ module.exports = {
     redisToken: process.env.UPSTASH_REDIS_REST_TOKEN,
     cacheKeyPrefix: process.env.CACHE_KEY_PREFIX || 'readyio',
     cloudinaryFolder: process.env.CLOUDINARY_FOLDER || 'readyio-blog',
+    uploadFolder: (process.env.UPLOAD_FOLDER || process.env.CLOUDINARY_FOLDER || 'readyio-blog').replace(/^\/+|\/+$/g, ''),
+    spaces: (() => {
+        const key = process.env.DO_SPACES_KEY;
+        const secret = process.env.DO_SPACES_SECRET;
+        const bucket = process.env.DO_SPACES_BUCKET;
+        const region = process.env.DO_SPACES_REGION || 'blr1';
+        const endpoint = (process.env.DO_SPACES_ENDPOINT || `https://${region}.digitaloceanspaces.com`).replace(/\/+$/, '');
+        const publicUrl = (process.env.DO_SPACES_CDN_URL || `https://${bucket}.${region}.digitaloceanspaces.com`).replace(/\/+$/, '');
+        return { enabled: Boolean(key && secret && bucket), key, secret, bucket, region, endpoint, publicUrl };
+    })(),
     revalidateSecret: process.env.REVALIDATE_SECRET || '',
     revalidateWebhooks: (process.env.REVALIDATE_WEBHOOKS || '')
         .split(',')

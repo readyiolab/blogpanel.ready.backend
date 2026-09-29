@@ -1,5 +1,5 @@
 const db = require('../models/database');
-const { destroyUploadedImage } = require('../config/cloudinary');
+const { destroyUploadedImage, isManagedImage } = require('../config/storage');
 const { clearCache } = require('../middleware/cache_middleware');
 
 exports.getAllCategories = async (req, res) => {
@@ -78,7 +78,7 @@ exports.updateCategory = async (req, res) => {
         const oldIconToDelete = req.body.icon &&
             current.icon &&
             current.icon !== req.body.icon &&
-            current.icon.includes('cloudinary.com')
+            isManagedImage(current.icon)
             ? current.icon
             : null;
 
@@ -124,7 +124,7 @@ exports.deleteCategory = async (req, res) => {
             });
         }
 
-        const iconToDelete = category.icon && category.icon.includes('cloudinary.com')
+        const iconToDelete = isManagedImage(category.icon)
             ? category.icon
             : null;
 

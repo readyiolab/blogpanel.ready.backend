@@ -1,4 +1,4 @@
-const { upload } = require('../config/cloudinary');
+const { upload } = require('../config/storage');
 
 // Controller function for handling the upload request
 const uploadImage = async (req, res) => {

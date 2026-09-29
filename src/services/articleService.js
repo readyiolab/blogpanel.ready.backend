@@ -1,5 +1,5 @@
 const db = require('../config/database');
-const { destroyUploadedImage } = require('../config/cloudinary');
+const { destroyUploadedImage } = require('../config/storage');
 
 // Paths the blog app serves itself; an article slug may never shadow them.
 const RESERVED_SLUGS = new Set(['category', 'feed.xml', 'sitemap.xml', 'robots.txt', 'api', 'page', 'search']);
