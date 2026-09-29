@@ -1,0 +1,12 @@
+node_modules/
+.env
+.env.*
+!.env.example
+logs/
+uploads/
+*.log
+.DS_Store
+dist/
+build/
+.antigravity/
+.gemini/

@@ -1,0 +1,149 @@
+{
+  "authors": {
+    "alex": {
+      "username": "alex.morgan",
+      "email": "alex.morgan@readyio.com",
+      "firstName": "Alex",
+      "lastName": "Morgan",
+      "title": "Product Designer",
+      "avatar": "author-1.jpg"
+    },
+    "priya": {
+      "username": "priya.shah",
+      "email": "priya.shah@readyio.com",
+      "firstName": "Priya",
+      "lastName": "Shah",
+      "title": "Engineering Lead",
+      "avatar": "author-2.jpg"
+    },
+    "jules": {
+      "username": "jules.bennett",
+      "email": "jules.bennett@readyio.com",
+      "firstName": "Jules",
+      "lastName": "Bennett",
+      "title": "Founder",
+      "avatar": "author-3.jpg"
+    }
+  },
+  "posts": [
+    {
+      "slug": "one-team-vs-five-vendors",
+      "title": "Why one accountable team beats five vendors, every time",
+      "excerpt": "Splitting product, CRM, mobile and AI across four agencies feels safe. It's the fastest way to build a broken system.",
+      "cover": "blog-1.jpg",
+      "category": "business",
+      "tags": ["Operations", "Strategy"],
+      "author": "jules",
+      "readingTime": 7,
+      "publishedAt": "2026-06-24",
+      "featured": true,
+      "body": [
+        { "type": "p", "text": "Every ambitious business eventually hits the same wall. Marketing builds a site with an agency. Ops picks a CRM with a consultant. Someone in support stitches Zapier flows together at 2am. A year later nothing talks to anything, and the founders spend more time coordinating vendors than growing the company." },
+        { "type": "h2", "text": "The hidden tax of fragmented delivery" },
+        { "type": "p", "text": "Every hand-off between vendors is a translation loss. Every translation loss shows up later as a bug, a duplicated feature, or a data model that has to be rewritten. That's the real cost of a fragmented stack — not the invoices, but the compounding rework." },
+        { "type": "quote", "text": "You don't buy software. You buy the ability to change it later." },
+        { "type": "h2", "text": "What one team actually changes" },
+        { "type": "list", "text": [
+          "Decisions get made in hours, not weeks of async threads.",
+          "One roadmap covers marketing, product, CRM and automation.",
+          "Design tokens, auth, and data models are shared across every surface."
+        ] },
+        { "type": "p", "text": "That's the Readyio bet: fewer vendors, more velocity, a system that keeps compounding value instead of debt." }
+      ]
+    },
+    {
+      "slug": "measuring-what-actually-matters",
+      "title": "Measuring what actually matters: KPIs founders keep getting wrong",
+      "excerpt": "Dashboards are cheap. Deciding what to put on them is the whole job. A framework we use with every client in the first two weeks.",
+      "cover": "blog-2.jpg",
+      "category": "product",
+      "tags": ["Analytics", "Strategy"],
+      "author": "alex",
+      "readingTime": 6,
+      "publishedAt": "2026-06-10",
+      "featured": false,
+      "body": [
+        { "type": "p", "text": "Most dashboards founders show us have twelve numbers on them and one is quietly wrong. Here's the shortlist we run every engagement." },
+        { "type": "h2", "text": "Start with the one number that describes the business" },
+        { "type": "p", "text": "Everything else is a diagnostic. If the top-line number moves, you should be able to trace it back to two or three inputs — no more." },
+        { "type": "h2", "text": "Retention beats acquisition (almost) every time" },
+        { "type": "p", "text": "A leaky bucket doesn't fill faster with a bigger tap. Fix retention curves before you scale spend." }
+      ]
+    },
+    {
+      "slug": "ai-agents-that-actually-ship",
+      "title": "AI agents that actually ship: a pattern that works in production",
+      "excerpt": "The demo works. The production version breaks on day two. Here's the architecture we use for AI agents that survive real customers.",
+      "cover": "blog-3.jpg",
+      "category": "ai",
+      "tags": ["AI", "Automation"],
+      "author": "priya",
+      "readingTime": 9,
+      "publishedAt": "2026-05-28",
+      "featured": true,
+      "body": [
+        { "type": "p", "text": "Anyone can build an AI demo in an afternoon. The hard part is what happens on day two, when real people ask real questions the demo never planned for." },
+        { "type": "h2", "text": "Treat the agent like a product, not a script" },
+        { "type": "p", "text": "It needs a scope, guardrails, telemetry, and an escape hatch to a human. Skip any of those and you don't have a feature, you have a support incident." },
+        { "type": "h3", "text": "The four layers we always ship" },
+        { "type": "list", "text": [
+          "Retrieval — grounded on your actual docs, not vibes.",
+          "Tools — a small, typed set of actions the agent can take.",
+          "Guardrails — refusal policies and PII scrubbing at the edge.",
+          "Observability — traces, evals, and a feedback loop from real users."
+        ] }
+      ]
+    },
+    {
+      "slug": "designing-mobile-that-feels-native",
+      "title": "Designing mobile experiences that feel native without a native team",
+      "excerpt": "Cross-platform is a business decision, not a design compromise. Here's how we get 90% of the native feel from a single codebase.",
+      "cover": "blog-4.jpg",
+      "category": "design",
+      "tags": ["Mobile", "Design"],
+      "author": "alex",
+      "readingTime": 5,
+      "publishedAt": "2026-05-14",
+      "featured": false,
+      "body": [
+        { "type": "p", "text": "Native-feeling apps aren't about the framework. They're about respecting platform conventions where they matter and ignoring them where they don't." },
+        { "type": "h2", "text": "The 20% of native that matters most" },
+        { "type": "p", "text": "Gestures, haptics, keyboard behavior, and safe areas. Get those right and most users can't tell." }
+      ]
+    },
+    {
+      "slug": "the-crm-you-actually-need",
+      "title": "The CRM you actually need is smaller than you think",
+      "excerpt": "Off-the-shelf CRMs punish you for being different. Custom ones can too — if you build the wrong thing. Here's the middle path.",
+      "cover": "blog-5.jpg",
+      "category": "engineering",
+      "tags": ["CRM", "Operations"],
+      "author": "jules",
+      "readingTime": 8,
+      "publishedAt": "2026-04-30",
+      "featured": false,
+      "body": [
+        { "type": "p", "text": "Most CRM projects fail for the same reason: someone tried to model every edge case up front instead of shipping the 20% that runs the business." },
+        { "type": "h2", "text": "Start with the pipeline, not the entities" },
+        { "type": "p", "text": "Model the flow first. The data structures will fall out of it naturally." }
+      ]
+    },
+    {
+      "slug": "shipping-culture-vs-planning-culture",
+      "title": "Shipping culture vs. planning culture: pick one",
+      "excerpt": "Teams that ship weekly and teams that plan quarterly are playing different games. The choice determines almost everything else.",
+      "cover": "blog-6.jpg",
+      "category": "business",
+      "tags": ["Culture", "Leadership"],
+      "author": "priya",
+      "readingTime": 4,
+      "publishedAt": "2026-04-18",
+      "featured": false,
+      "body": [
+        { "type": "p", "text": "The teams we admire have a strong bias to action. The teams we get called in to rescue have a strong bias to plans." },
+        { "type": "h2", "text": "Bias to action doesn't mean careless" },
+        { "type": "p", "text": "It means smaller batches, shorter feedback loops, and enough guardrails that a Tuesday mistake isn't a Friday emergency." }
+      ]
+    }
+  ]
+}
